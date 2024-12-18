@@ -1,5 +1,5 @@
 function Tabs(props) {
-    const { todos } = props;
+    const { todos, activeTab, setActiveTab} = props;
 
 
     const tabs = ["All", "Open", "Completed"]
@@ -14,11 +14,16 @@ function Tabs(props) {
                         todos.filter(todo => todo.complete).length
                     
                 return (
-                    <button key={tabIndex} className = "tab-button">
-                        <h4>{tab}<span> ({tabCount})</span></h4>
+                    <button key={tabIndex} 
+                        className = {"tab-button" + (tab===activeTab ? 'selectedTab' : " ")} 
+                        onClick = {() => setActiveTab(tab) }>
+                            <h4>{tab}<span> ({tabCount})</span></h4>
                     </button>
+                    
                 )
             })}
+
+            <hr />
             
         </nav>
     )
