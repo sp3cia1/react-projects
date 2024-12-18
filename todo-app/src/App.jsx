@@ -29,11 +29,7 @@ function App() {
   }
 
   function handleDeleteTodo(index){
-    setTodos(prevItems => prevItems.filter(
-      (val, valIndex) => {
-        return valIndex !== index
-      }
-    ))
+    setTodos(prevItems => prevItems.filter((_, i) => i !== index));
   }
  
 

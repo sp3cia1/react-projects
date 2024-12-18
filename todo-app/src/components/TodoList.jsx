@@ -1,25 +1,24 @@
 import TodoCard from "./TodoCard";
 
 function TodoList(props) {
-    const {todos,activeTab, handleDeleteTodo} = props
+    const {todos, activeTab, handleDeleteTodo} = props;
 
-    const  tab = activeTab
-    const filteredTodos = tab === "All" ? todos :
-        tab === "Open" ? todos.filter(todo => !todo.complete) : todos.filter(todo => todo.complete)
+    const allTodos = todos.map((todo, index) => ({...todo, originalIndex: index}));
+    
+    const displayTodos = activeTab === "All" ? allTodos :
+        activeTab === "Open" ? allTodos.filter(todo => !todo.complete) : 
+        allTodos.filter(todo => todo.complete);
+
     return (
         <>
-            {
-                filteredTodos.map((todo, todoIndex) => {
-                    return (
-                        <TodoCard 
-                            key = {todoIndex} 
-                            todoIndex = {todoIndex}
-                            handleDeleteTodo = {handleDeleteTodo}
-                            todo = {todo}
-                        />
-                    )
-                })
-            }
+            {displayTodos.map((todo) => (
+                <TodoCard 
+                    key={todo.originalIndex}
+                    todoIndex={todo.originalIndex}
+                    handleDeleteTodo={handleDeleteTodo}
+                    todo={todo}
+                />
+            ))}
         </>
     )
 }
