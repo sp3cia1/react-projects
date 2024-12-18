@@ -28,16 +28,20 @@ function App() {
     
   }
 
-  function handleDeleteTodo(){
-
+  function handleDeleteTodo(index){
+    setTodos(prevItems => prevItems.filter(
+      (val, valIndex) => {
+        return valIndex !== index
+      }
+    ))
   }
-
+ 
 
   return (
     <>
         <Header todos = {todos}/>
         <Tabs todos = {todos} activeTab = {activeTab} setActiveTab = {setActiveTab}/>
-        <TodoList todos = {todos} activeTab = {activeTab}/>
+        <TodoList todos = {todos} activeTab = {activeTab} handleDeleteTodo={handleDeleteTodo}/>
         <TodoInput handleAddTodo = {handleAddTodo}/>
     </>
   )

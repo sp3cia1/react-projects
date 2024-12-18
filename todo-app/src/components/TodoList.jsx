@@ -1,7 +1,7 @@
 import TodoCard from "./TodoCard";
 
 function TodoList(props) {
-    const {todos,activeTab} = props
+    const {todos,activeTab, handleDeleteTodo} = props
 
     const  tab = activeTab
     const filteredTodos = tab === "All" ? todos :
@@ -13,6 +13,8 @@ function TodoList(props) {
                     return (
                         <TodoCard 
                             key = {todoIndex} 
+                            todoIndex = {todoIndex}
+                            handleDeleteTodo = {handleDeleteTodo}
                             todo = {todo}
                         />
                     )
