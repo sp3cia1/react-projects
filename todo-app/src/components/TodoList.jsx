@@ -1,7 +1,7 @@
 import TodoCard from "./TodoCard";
 
 function TodoList(props) {
-    const {todos, activeTab, handleDeleteTodo} = props;
+    const {todos, activeTab, handleDeleteTodo, handleCompleteTodo} = props;
 
     const allTodos = todos.map((todo, index) => ({...todo, originalIndex: index}));
     
@@ -16,6 +16,7 @@ function TodoList(props) {
                     key={todo.originalIndex}
                     todoIndex={todo.originalIndex}
                     handleDeleteTodo={handleDeleteTodo}
+                    handleCompleteTodo = {handleCompleteTodo}
                     todo={todo}
                 />
             ))}

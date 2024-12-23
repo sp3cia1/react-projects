@@ -24,12 +24,16 @@ function App() {
     setTodos(prevItems => [...prevItems, {input: newTodo, complete: false}]);
   }
 
-  function handleEditTodo() {
-    
+  function handleCompleteTodo(index) {
+    let newTodoList = [...todos]
+    let completedTodo = newTodoList[index]
+    completedTodo.complete = true
+    newTodoList[index] = completedTodo
+    setTodos(newTodoList)
   }
 
   function handleDeleteTodo(index){
-    setTodos(prevItems => prevItems.filter((_, i) => i !== index));
+    setTodos(prevItems => prevItems.filter((val, i) => i !== index));
   }
  
 
@@ -37,7 +41,7 @@ function App() {
     <>
         <Header todos = {todos}/>
         <Tabs todos = {todos} activeTab = {activeTab} setActiveTab = {setActiveTab}/>
-        <TodoList todos = {todos} activeTab = {activeTab} handleDeleteTodo={handleDeleteTodo}/>
+        <TodoList todos = {todos} activeTab = {activeTab} handleDeleteTodo={handleDeleteTodo} handleCompleteTodo={handleCompleteTodo}/>
         <TodoInput handleAddTodo = {handleAddTodo}/>
     </>
   )
