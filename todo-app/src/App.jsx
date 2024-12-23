@@ -2,7 +2,7 @@ import Tabs from './components/Tabs'
 import TodoInput from './components/TodoInput'
 import TodoList from './components/ToDoList'
 import Header from './components/Header'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 
 function App() {
@@ -21,7 +21,9 @@ function App() {
   const [activeTab, setActiveTab] = useState('Open')
 
   function handleAddTodo(newTodo) {
-    setTodos(prevItems => [...prevItems, {input: newTodo, complete: false}]);
+    const updatedTodos = [...todos, {input: newTodo, complete: false}];
+    setTodos(updatedTodos);
+    handleSaveData(updatedTodos);
   }
 
   function handleCompleteTodo(index) {
@@ -30,11 +32,24 @@ function App() {
     completedTodo.complete = true
     newTodoList[index] = completedTodo
     setTodos(newTodoList)
+    handleSaveData(newTodoList)
   }
 
   function handleDeleteTodo(index){
-    setTodos(prevItems => prevItems.filter((val, i) => i !== index));
+    let newTodoList = todos.filter((val, i) => i !== index)
+    setTodos(newTodoList)
+    handleSaveData(newTodoList)
   }
+
+  function handleSaveData(currTodos){
+    localStorage.setItem('todo-app', JSON.stringify({ todos:currTodos }))
+  }
+
+  useEffect(() => {
+    if(!localStorage  || !localStorage.getItem('todo-app')) {return}
+    let db = JSON.parse(localStorage.getItem('todo-app'))
+    setTodos(db.todos)
+  }, [])
  
 
   return (
