@@ -1,6 +1,6 @@
 import Tabs from './components/Tabs'
 import TodoInput from './components/TodoInput'
-import TodoList from './components/ToDoList'
+import TodoList from './components/TodoList'
 import Header from './components/Header'
 import { useState, useEffect } from 'react'
 
