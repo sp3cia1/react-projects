@@ -9,7 +9,7 @@ function Header(props) {
         
         <header>
             <h1 className ="text-gradient">
-                You have {todosLength} {isTasksPlural} man, pls complete them.
+                You have {todosLength} {isTasksPlural}
             </h1>
         </header>
     )
